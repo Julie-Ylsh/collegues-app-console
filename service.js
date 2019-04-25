@@ -1,34 +1,26 @@
-var request = require('request');
+const request = require('request-promise-native');
 
 
-function rechercherColleguesParNom(nomRecherche, callback) {
-    var URL = 'https://julie-collegue-api.herokuapp.com/collegue?nomClient='+nomRecherche
-    request(URL, { json: true }, function(err, res, body) {
-
-        var tableauColleguesTrouves = body;
-
-        callback(tableauColleguesTrouves);
-
-
-    });
-
+function rechercherColleguesParNom(nomRecherche) {
+    let URL = `https://julie-collegue-api.herokuapp.com/collegue?nomClient=${nomRecherche}`
+    return request(URL, { json: true });
 };
 
-function creerUnCollegue(collegue, callback){
+function creerUnCollegue(collegue, callback) {
     request({
-        url : "https://julie-collegue-api.herokuapp.com/collegue",
-        method : 'POST',
-        json : true,
-        body : collegue 
-    }, function(err, res, body) {
+        url: "https://julie-collegue-api.herokuapp.com/collegue",
+        method: 'POST',
+        json: true,
+        body: collegue
+    }, (err, res, body) => {
 
-        var collegueCree = body;
+        let collegueCree = body;
 
         callback(collegueCree);
 
     });
 
-   
+
 };
 
 exports.rechercherColleguesParNom = rechercherColleguesParNom;

@@ -1,3 +1,3 @@
 console.log('** Administration Collegues **');
-var presentation = require('./presentation.js');
+const presentation = require('./presentation.js');
 presentation.start();
